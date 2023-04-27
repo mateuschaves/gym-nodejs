@@ -18,11 +18,13 @@
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "^2.25.2",
+    "prisma": "4.13.0",
     "tsup": "6.7.0",
     "tsx": "3.12.6",
     "typescript": "5.0.4"
   },
   "dependencies": {
+    "@prisma/client": "4.13.0",
     "dotenv": "16.0.3",
     "fastify": "4.16.3",
     "zod": "3.21.4"
