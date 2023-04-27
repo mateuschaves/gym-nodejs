@@ -1,0 +1,22 @@
+{
+  "name": "gym-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mateus Henrique",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start:dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.1",
+    "tsup": "^6.7.0",
+    "tsx": "^3.12.6",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "fastify": "^4.16.3"
+  }
+}
