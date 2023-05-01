@@ -9,7 +9,7 @@ interface RegisterUseCaseRequest {
     password: string;
 }
 
-export class RegisterUseCase<T> {
+export class RegisterUseCase{
     constructor(
         private usersRepository: UsersRepository = new PrismaUsersRepository()
     ) { }
@@ -23,10 +23,14 @@ export class RegisterUseCase<T> {
             throw new UserAlreadyExists();
         }
 
-        await this.usersRepository.create({
+        const user = await this.usersRepository.create({
             name,
             email,
             password_hash,
         });
+
+        return {
+            user
+        }
     }
 }
