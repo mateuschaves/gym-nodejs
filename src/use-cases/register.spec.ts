@@ -1,14 +1,17 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeEach } from "vitest";
 import { RegisterUseCase } from "./register";
 import InMemoryUsersRepository from "@/repositories/in-memory/in-memory-users-repository";
 
 import { compare } from "bcryptjs";
 import { UserAlreadyExists } from "./erros/user-already-exists-error";
 
-describe("Register use case", () => {
-  it("should hash user password upon registration", async () => {
-    const registerUseCase = new RegisterUseCase(new InMemoryUsersRepository());
+let registerUseCase: RegisterUseCase;
 
+describe("Register use case", () => {
+  beforeEach(() => {
+    registerUseCase = new RegisterUseCase(new InMemoryUsersRepository());
+  });
+  it("should hash user password upon registration", async () => {
     const { user } = await registerUseCase.execute({
       name: "John Doe",
       email: "johndoe@gmail.com",
@@ -23,8 +26,6 @@ describe("Register use case", () => {
   });
 
   it("should not allow two users with the same email", async () => {
-    const registerUseCase = new RegisterUseCase(new InMemoryUsersRepository());
-
     await registerUseCase.execute({
       name: "John Doe",
       email: "johndoe@gmail.com",
@@ -40,21 +41,19 @@ describe("Register use case", () => {
     ).rejects.toBeInstanceOf(UserAlreadyExists);
   });
 
-    it("should be able to create a user", async () => {
-        const registerUseCase = new RegisterUseCase(new InMemoryUsersRepository());
+  it("should be able to create a user", async () => {
+    const userToCreate = {
+      name: "John Doe",
+      email: "johndoe@gmail.com",
+      password: "123456",
+    };
 
-        const userToCreate = {
-            name: "John Doe",
-            email: "johndoe@gmail.com",
-            password: "123456",
-        }
+    const { user } = await registerUseCase.execute(userToCreate);
 
-        const { user } = await registerUseCase.execute(userToCreate);
-
-        expect(user).toMatchObject({
-            name: userToCreate.name,
-            email: userToCreate.email,
-            password_hash: expect.any(String),
-        })
-    })
+    expect(user).toMatchObject({
+      name: userToCreate.name,
+      email: userToCreate.email,
+      password_hash: expect.any(String),
+    });
+  });
 });
