@@ -1,7 +1,7 @@
 import { Gym, Prisma } from "@prisma/client";
 import { randomUUID } from "node:crypto";
 
-import { Decimal } from "@prisma/client/runtime";
+import { Decimal } from "@prisma/client/runtime/library";
 import { FindManyNearbyParams, GymsRepository } from "../gyms-repository";
 import { getDistanceBetweenCoordinatesInKm } from '../../utils/get-distance-between-coordinates';
 
