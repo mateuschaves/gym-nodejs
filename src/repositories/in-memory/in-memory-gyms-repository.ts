@@ -33,4 +33,17 @@ export default class InMemoryGymsRepository implements GymsRepository {
 
         return gym;
     }
+
+    async searchByTitle(query: string, page: number): Promise<Gym[]> {
+        const gyms = this.items.filter((gym) => gym.title.toLowerCase().includes(query.toLowerCase()));
+
+        if (page) {
+            const pageSize = 20;
+            const offset = (page - 1) * pageSize;
+
+            return gyms.slice(offset, page * pageSize);
+        }
+
+        return gyms;
+    }
 }
