@@ -1,9 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { Gym, Prisma } from '@prisma/client'
-import { GymsRepository } from "../gyms-repository";
+import { FindManyNearbyParams, GymsRepository } from "../gyms-repository";
 
 export class PrismaGymsRepository implements GymsRepository {
-
     async create(data: Prisma.GymCreateInput) {
         return prisma.gym.create({
             data,
@@ -24,6 +23,21 @@ export class PrismaGymsRepository implements GymsRepository {
                 title: {
                     contains: title,
                     mode: 'insensitive',
+                },
+            },
+        })
+    }
+
+    async findManyNearby({ latitude, longitude }: FindManyNearbyParams): Promise<Gym[]> {
+        return prisma.gym.findMany({
+            where: {
+                latitude: {
+                    gte: latitude - 0.1,
+                    lte: latitude + 0.1,
+                },
+                longitude: {
+                    gte: longitude - 0.1,
+                    lte: longitude + 0.1,
                 },
             },
         })
