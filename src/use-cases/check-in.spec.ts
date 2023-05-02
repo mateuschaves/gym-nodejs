@@ -2,23 +2,24 @@ import { beforeEach, describe, expect, it, vi, afterEach } from "vitest";
 
 import InMemoryCheckInsRepository from "@/repositories/in-memory/in-memory-check-ins-repository";
 import { CheckInUseCase } from "./check-in";
-import InMemoryGymsRepository from "@/repositories/in-memory/in-memory-gyms-repository";
 import { Decimal } from "@prisma/client/runtime/library";
+import InMemoryGymsRepository from "@/repositories/in-memory/in-memory-gyms-repository";
+import { MaxDistanceError } from "./erros/max-distance-error";
 
 let inMemoryCheckInsRepository: InMemoryCheckInsRepository;
-let inMemoryGymsRepository: InMemoryGymsRepository;
+let gymsRepository: InMemoryGymsRepository;
 let sut: CheckInUseCase;
 
 describe("Check In use case", () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         inMemoryCheckInsRepository = new InMemoryCheckInsRepository();
-        inMemoryGymsRepository = new InMemoryGymsRepository();
+        gymsRepository = new InMemoryGymsRepository();
         sut = new CheckInUseCase(
             inMemoryCheckInsRepository,
-            inMemoryGymsRepository
+            gymsRepository
         );
 
-        inMemoryGymsRepository.items.push({
+        await gymsRepository.create({
             id: "gym-id",
             title: "Gym",
             description: "Gym description",
@@ -92,7 +93,7 @@ describe("Check In use case", () => {
     });
 
     it("should be able to check in on a near gym", async () => {
-        inMemoryGymsRepository.items.push({
+        await gymsRepository.create({
             id: "near-gym-id",
             title: "Near Gym",
             description: "Near Gym description",
@@ -112,8 +113,8 @@ describe("Check In use case", () => {
             id: expect.any(String),
         })
     })
-    it("should not be able to check in on a distant gym", () => {
-        inMemoryGymsRepository.items.push({
+    it("should not be able to check in on a distant gym", async () => {
+        await gymsRepository.create({
             id: "distant-gym-id",
             title: "Distant Gym",
             description: "Distant Gym description",
@@ -127,6 +128,6 @@ describe("Check In use case", () => {
             gymId: "distant-gym-id",
             userLatitude: -8.277631,
             userLongitude: -35.969342,
-        })).rejects.toBeInstanceOf(Error)
+        })).rejects.toBeInstanceOf(MaxDistanceError)
     })
 });

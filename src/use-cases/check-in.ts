@@ -4,6 +4,7 @@ import { GymsRepository } from "@/repositories/gyms-repository";
 import { AlreadyCheckedInToday } from "./erros/already-checked-in-today";
 import { ResourceNotFoundError } from "./erros/resource-not-found-error";
 import { getDistanceBetweenCoordinatesInKm } from "../utils/get-distance-between-coordinates";
+import { MaxDistanceError } from "./erros/max-distance-error";
 
 interface CheckInRequest {
     userId: string;
@@ -50,7 +51,7 @@ export class CheckInUseCase {
         const MAX_DISTANCE_IN_KM = 0.1;
 
         if (distance > MAX_DISTANCE_IN_KM) {
-            throw new Error("You are too far from the gym");
+            throw new MaxDistanceError();
         }
 
         if (checkInOnSameDate) {

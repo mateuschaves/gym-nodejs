@@ -1,5 +1,5 @@
 import { hash } from "bcryptjs";
-import { PrismaUsersRepository } from "@/repositories/prisma-users-repository";
+import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
 import { UsersRepository } from "@/repositories/users-repository";
 import { UserAlreadyExists } from "./erros/user-already-exists-error";
 
@@ -9,7 +9,7 @@ interface RegisterUseCaseRequest {
     password: string;
 }
 
-export class RegisterUseCase{
+export class RegisterUseCase {
     constructor(
         private usersRepository: UsersRepository = new PrismaUsersRepository()
     ) { }
