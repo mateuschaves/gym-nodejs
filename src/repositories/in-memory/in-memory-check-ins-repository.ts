@@ -5,6 +5,7 @@ import { CheckInsRepository } from "../check-ins-repository";
 import dayjs from "dayjs";
 
 export default class InMemoryCheckInsRepository implements CheckInsRepository {
+
     public items: CheckIn[] = [];
 
     async findByUserIdOnDate(userId: string, date: Date) {
@@ -40,5 +41,18 @@ export default class InMemoryCheckInsRepository implements CheckInsRepository {
         this.items.push(checkIn);
 
         return checkIn;
+    }
+
+    async findManyByUserId(userId: string, page: number): Promise<CheckIn[]> {
+        const items = this.items.filter((checkIn) => checkIn.user_id === userId)
+
+        if (page) {
+            const pageSize = 20;
+            const offset = (page - 1) * pageSize;
+
+            return items.slice(offset, page * pageSize);
+        }
+
+        return items
     }
 }
