@@ -3,7 +3,7 @@ import { PrismaGymsRepository } from "@/repositories/prisma/prisma-gyms-reposito
 import { Gym } from "@prisma/client";
 
 interface SearchGymUseCaseRequest {
-    query: string
+    query: string | null
     page?: number
 }
 
