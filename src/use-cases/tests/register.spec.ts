@@ -1,9 +1,9 @@
 import { describe, expect, it, beforeEach } from "vitest";
-import { RegisterUseCase } from "./register";
+import { RegisterUseCase } from "../register";
 import InMemoryUsersRepository from "@/repositories/in-memory/in-memory-users-repository";
 
 import { compare } from "bcryptjs";
-import { UserAlreadyExists } from "./erros/user-already-exists-error";
+import { UserAlreadyExists } from "../erros/user-already-exists-error";
 
 let registerUseCase: RegisterUseCase;
 

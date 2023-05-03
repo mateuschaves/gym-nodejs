@@ -1,6 +1,6 @@
 import InMemoryCheckInsRepository from '@/repositories/in-memory/in-memory-check-ins-repository';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { FetchUsersCheckInHistoryUseCase } from './fetch-user-check-ins-history';
+import { FetchUsersCheckInHistoryUseCase } from '../fetch-user-check-ins-history';
 
 let checkInsRepository: InMemoryCheckInsRepository
 let sut: FetchUsersCheckInHistoryUseCase
@@ -25,7 +25,7 @@ describe('Fetch User Check-in History Use Case', () => {
         })
 
 
-        const { checkIns } = await sut.execute({ userId })
+        const { checkIns } = await sut.execute({ userId, page: 1 })
 
         expect(checkIns).toHaveLength(2)
         expect(checkIns).toEqual(

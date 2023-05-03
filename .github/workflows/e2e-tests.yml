@@ -33,7 +33,7 @@ jobs:
       - name: Install dependecies
         run: npm install
         
-      - name: unit tests
+      - name: e2e tests
         run: npm run test:e2e
 
         env: 
