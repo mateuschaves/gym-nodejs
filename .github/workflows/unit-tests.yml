@@ -20,9 +20,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        cache: npm
 
     - name: Install dependecies
-      run: npm install
+      run: npm ci
       
     - name: unit tests
       run: npm run test
