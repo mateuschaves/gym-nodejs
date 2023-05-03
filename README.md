@@ -1,4 +1,5 @@
 # Gym NodeJS
+
 🏋️‍♀️ 💪  Api feita usando fastify e prisma para gerenciar check-ins de academia
 
 ## Requisitos
@@ -15,6 +16,18 @@
  2. Instale as dependências: `npm install`
  3. Crie um arquivo `.env` usando o modelo de exemplo `.env.example`
  4. Execute as migrations usando o comando: `npx prisma migrate deploy`
+
+ Ao executar as migrations, uma seed popula o banco com um usuário `ADMIN` com as seguintes credenciais:
+
+ ```json
+ {
+    "email": "admin@example.com",
+    "password": "123456"
+ }
+    
+ ```
+
+ Obs: A senha é gerada usando o secret `gym` nas configurações do JWT
 
 ## Uso
 
