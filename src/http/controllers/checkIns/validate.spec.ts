@@ -15,7 +15,7 @@ describe('Valitade user check in (e2e)', () => {
     })
 
     it('should be able to validate user check ins', async () => {
-        const { token } = await createAndAuthenticateUser(app)
+        const { token } = await createAndAuthenticateUser(app, true)
 
         const createGymUseCase = makeCreateGymUseCase()
         const checkInUseCase = makeCheckInUseCase()

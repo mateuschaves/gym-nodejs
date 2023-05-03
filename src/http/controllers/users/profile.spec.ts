@@ -24,7 +24,7 @@ describe('Profile (e2e)', () => {
         expect(profileResponse.body.user).toEqual(
             expect.objectContaining({
                 email: 'jhondoe@example.com',
-                name: 'John Doe',
+                name: 'Jhon Doe',
                 id: expect.any(String),
             })
         )
