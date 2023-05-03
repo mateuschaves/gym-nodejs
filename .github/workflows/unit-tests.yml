@@ -23,7 +23,7 @@ jobs:
         cache: npm
 
     - name: Install dependecies
-      run: npm ci
+      run: npm install
       
     - name: unit tests
       run: npm run test
