@@ -3,7 +3,7 @@
 
 ## Requisitos
 
-[Node.js](https://nodejs.org/en) (versão 16.10 ou superior)
+[Node.js](https://nodejs.org/en) (versão 16.x ou superior)
 
 [TypeScript](https://www.typescriptlang.org/) (versão 5 ou superior)
 
