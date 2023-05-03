@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { ValidateCheckInUseCase } from './validate-check-in';
+import { ValidateCheckInUseCase } from '../validate-check-in';
 import InMemoryCheckInsRepository from '@/repositories/in-memory/in-memory-check-ins-repository';
 import dayjs from 'dayjs';
-import { ResourceNotFoundError } from './erros/resource-not-found-error';
-import { LateCheckInValidationError } from './erros/late-check-in-validation-error';
+import { ResourceNotFoundError } from '../erros/resource-not-found-error';
+import { LateCheckInValidationError } from '../erros/late-check-in-validation-error';
 
 let checkInsRepository: InMemoryCheckInsRepository
 let sut: ValidateCheckInUseCase;
