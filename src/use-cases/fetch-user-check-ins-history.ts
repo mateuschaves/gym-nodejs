@@ -3,7 +3,7 @@ import { CheckInsRepository } from "@/repositories/check-ins-repository";
 
 interface FetchUsersCheckInHistoryRequest {
     userId: string;
-    page?: number
+    page: number
 }
 
 interface FetchUsersCheckInHistoryResponse {
