@@ -27,6 +27,10 @@ app.register(usersRoutes)
 app.register(gymsRoutes)
 app.register(checkInRoutes)
 
+app.get('/', async () => {
+    return { ok: '🚀 🏋️‍♀️ 💪 Gym Fastify API' }
+})
+
 app.setErrorHandler((error, _, reply) => {
     if (error instanceof ZodError) {
         reply.status(400).send({ message: 'Validation error', issues: error.format() })
